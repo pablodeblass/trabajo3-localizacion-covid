@@ -4,9 +4,9 @@ import com.practica.genericas.Coordenada;
 import com.practica.genericas.FechaHora;
 import com.practica.genericas.PosicionPersona;
 
-public class ListaContactos {
+public class ListaContactos { ///holaaa los comentario no le sgustan
     private NodoTemporal lista;
-    private int size;
+    private int size;  // y aqui pongo otro jojojojojojojoj
 
     public void insertarNodoTemporal(PosicionPersona p) {
         NodoTemporal aux = lista, ant = null;
