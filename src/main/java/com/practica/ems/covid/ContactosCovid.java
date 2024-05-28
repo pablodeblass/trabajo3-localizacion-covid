@@ -101,26 +101,37 @@ public class ContactosCovid {
 		String[] lines = dividirEntrada(data);
 		for (String line : lines) {
 			String[] fields = dividirLineaData(line);
-			switch (fields[0]) {
+			String dataType = fields[0];
+
+			switch (dataType) {
 				case "PERSONA":
-					if (fields.length != Constantes.MAX_DATOS_PERSONA) {
-						throw new EmsInvalidNumberOfDataException("El número de datos para PERSONA es menor de 8");
-					}
-					this.poblacion.addPersona(crearPersona(fields));
+					processPersona(fields);
 					break;
 				case "LOCALIZACION":
-					if (fields.length != Constantes.MAX_DATOS_LOCALIZACION) {
-						throw new EmsInvalidNumberOfDataException("El número de datos para LOCALIZACION es menor de 6");
-					}
-					PosicionPersona pp = crearPosicionPersona(fields);
-					this.localizacion.addLocalizacion(pp);
-					this.listaContactos.insertarNodoTemporal(pp);
+					processLocalizacion(fields);
 					break;
 				default:
 					throw new EmsInvalidTypeException();
 			}
 		}
 	}
+
+	private void processPersona(String[] fields) throws EmsInvalidNumberOfDataException, EmsDuplicatePersonException {
+		if (fields.length != Constantes.MAX_DATOS_PERSONA) {
+			throw new EmsInvalidNumberOfDataException("El número de datos para PERSONA es menor de 8");
+		}
+		this.poblacion.addPersona(crearPersona(fields));
+	}
+
+	private void processLocalizacion(String[] fields) throws EmsInvalidNumberOfDataException, EmsDuplicateLocationException {
+		if (fields.length != Constantes.MAX_DATOS_LOCALIZACION) {
+			throw new EmsInvalidNumberOfDataException("El número de datos para LOCALIZACION es menor de 6");
+		}
+		PosicionPersona pp = crearPosicionPersona(fields);
+		this.localizacion.addLocalizacion(pp);
+		this.listaContactos.insertarNodoTemporal(pp);
+	}
+
 
 	public int findPersona(String documento) throws EmsPersonNotFoundException {
 		return this.poblacion.findPersona(documento);
