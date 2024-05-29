@@ -4,10 +4,15 @@ package com.practica.genericas;
 public class Coordenada {
 	private float latitud, longitud;
 
-	
+
 	public Coordenada() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Coordenada(Coordenada co) {
+		this.latitud = co.latitud;
+		this.longitud = co.longitud;
 	}
 
 	public Coordenada(float latitud, float longitud) {
@@ -43,15 +48,20 @@ public class Coordenada {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null || getClass() != obj.getClass()) {
+		if (obj == null)
 			return false;
-		}
+		if (getClass() != obj.getClass())
+			return false;
+
 		Coordenada other = (Coordenada) obj;
-		return Float.floatToIntBits(latitud) == Float.floatToIntBits(other.latitud) &&
-				Float.floatToIntBits(longitud) == Float.floatToIntBits(other.longitud);
+		return latitud == other.latitud && longitud == other.longitud;
 	}
-	
+
+	@Override
+	public String toString() {
+		return String.format("%.4f;%.4f\n", latitud, longitud);
+	}
+
 }
