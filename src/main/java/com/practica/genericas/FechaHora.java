@@ -121,7 +121,7 @@ public class FechaHora implements Comparable<FechaHora>{
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) { //
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -147,3 +147,5 @@ public class FechaHora implements Comparable<FechaHora>{
 	
 	
 }
+
+
